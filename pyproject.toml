@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "video-service-auth"
+name = "auth-service"
 version = "0.1.0"
 description = ""
 authors = ["nickAnhel <anhimovn1@gmail.com>"]
