@@ -1,0 +1,6 @@
+.vscode
+.venv
+.env
+.pylintrc
+*.sqlite3
+__pycache__
