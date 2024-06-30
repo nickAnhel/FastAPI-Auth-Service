@@ -4,3 +4,4 @@
 .pylintrc
 *.sqlite3
 __pycache__
+certs/
