@@ -27,3 +27,9 @@ openssl genrsa -out private.pem 2048
 # Create a public key
 openssl rsa -in private.pem -outform PEM -pubout -out public.pem
 ```
+
+Run `alembic` migrations.
+
+```bash
+alembic upgrade head
+```
