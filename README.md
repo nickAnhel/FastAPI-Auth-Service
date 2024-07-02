@@ -2,7 +2,7 @@
 
 A service for users authentication and authorization based on JWT.
 
-## Local launhing
+## Local launching
 
 Create a virtual environment and install all required dependencies using `poetry`.
 
