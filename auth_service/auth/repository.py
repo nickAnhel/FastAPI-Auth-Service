@@ -1,9 +1,8 @@
 from typing import Any
-from sqlalchemy import select, delete
+from sqlalchemy import select, update, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from auth_service.auth.models import User
-# from auth_service.auth.scemas import UserCreate
 
 
 class UserRepository:
@@ -12,7 +11,6 @@ class UserRepository:
 
     async def create(
         self,
-        # data: UserCreate,
         data: dict[str, Any],
     ) -> User:
         user = User(**data)
@@ -39,6 +37,16 @@ class UserRepository:
 
         result = await self.async_session.execute(query)
         return list(result.scalars().all())
+
+    async def update(
+        self,
+        data: dict[str, Any],
+        **filters,
+    ) -> User:
+        stmt = update(User).filter_by(**filters).values(**data).returning(User)
+        user = await self.async_session.execute(stmt)
+
+        return user.scalar_one()
 
     async def delete(
         self,

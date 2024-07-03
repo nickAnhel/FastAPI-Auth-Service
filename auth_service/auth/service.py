@@ -1,4 +1,4 @@
-from auth_service.auth.scemas import UserCreate, UserGet
+from auth_service.auth.scemas import UserCreate, UserGet, UserGetWithPassword, UserUpdate
 from auth_service.auth.repository import UserRepository
 from auth_service.auth.exceptions import UserNotFound
 from auth_service.auth.utils import get_password_hash
@@ -17,14 +17,18 @@ class UserService:
         user = await self.repository.create(data=user_data)
         return UserGet.model_validate(user)
 
-    async def get_user(self, **filters) -> UserGet | None:
+    async def get_user(
+        self,
+        include_password: bool = False,
+        **filters,
+    ) -> UserGet | UserGetWithPassword:
         """Get user by filters (username, email or id)."""
         user = await self.repository.get_single(**filters)
 
         if not user:
             raise UserNotFound(f"User with filters {filters} not found")
 
-        return UserGet.model_validate(user)
+        return UserGetWithPassword.model_validate(user) if include_password else UserGet.model_validate(user)
 
     async def get_users(
         self,
@@ -39,6 +43,16 @@ class UserService:
             limit=limit,
         )
         return [UserGet.model_validate(user) for user in users]
+
+    async def update_user(
+        self,
+        data: UserUpdate,
+        **filters,
+    ) -> UserGet:
+        """Update user by filters (username, email or id)."""
+        update_data = {k: v for k, v in data.model_dump().items() if v is not None}
+        user = await self.repository.update(data=update_data, **filters)
+        return UserGet.model_validate(user)
 
     async def delete_user(self, **filters) -> None:
         """Delete user by filters (username, email or id)."""
