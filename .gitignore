@@ -1,6 +1,7 @@
 .vscode
 .venv
 .env
+.docker-env
 .pylintrc
 *.sqlite3
 __pycache__

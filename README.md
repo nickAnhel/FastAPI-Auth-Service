@@ -33,3 +33,11 @@ Run `alembic` migrations.
 ```bash
 alembic upgrade head
 ```
+
+## Launching with Docker
+
+Build and run the containers.
+
+```bash
+docker compose up --build
+```

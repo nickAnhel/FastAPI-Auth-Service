@@ -1,0 +1,12 @@
+DB_HOST="Your host"
+DB_PORT="Your port"
+DB_NAME="Your database name"
+DB_USER="Your database user"
+DB_PASSWORD="Your database password"
+
+POSTGRES_DB="Your database name"
+POSTGRES_USER="Your database user"
+POSTGRES_PASSWORD="Your database password"
+
+PGADMIN_DEFAULT_EMAIL="Your pgadmin email"
+PGADMIN_DEFAULT_PASSWORD="Your pgadmin password"
